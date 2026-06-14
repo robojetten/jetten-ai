@@ -74,12 +74,12 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
           TZ: Europe/Amsterdam
-          BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: |
-          hugo \
-            --gc \
-            --minify \
-            --baseURL "$BASE_URL/"
+          # Build against the canonical production domain from hugo.toml
+          # (baseURL = https://jetten.ai/). We deliberately do NOT use
+          # configure-pages' base_url here — it injects the github.io project
+          # subpath (/jetten-ai/) and breaks every asset URL at the apex domain.
+          hugo --gc --minify
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
