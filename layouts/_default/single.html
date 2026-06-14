@@ -12,7 +12,7 @@
     <p class="article__meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
       <span class="article__sep">·</span>
-      <span>{{ .ReadingTime }} min read</span>
+      <span>{{ partial "reading-time.html" . }} min read</span>
     </p>
     {{- with .Params.categories }}
       <p class="article__cats">

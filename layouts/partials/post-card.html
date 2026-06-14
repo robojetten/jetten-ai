@@ -10,7 +10,7 @@
         <span class="post-card__cat">[{{ . | upper }}]</span>
       {{- end }}
     {{- end }}
-    <span class="post-card__rt">{{ $p.ReadingTime }} MIN</span>
+    <span class="post-card__rt">{{ partial "reading-time.html" $p }} MIN</span>
   </p>
   <h2 class="post-card__title">
     <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>

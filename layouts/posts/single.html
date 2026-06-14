@@ -8,17 +8,10 @@
     {{- with .Description }}
       <p class="article__deck">{{ . }}</p>
     {{- end }}
-    {{- /* Reading time excludes the appendices: count words only up to the first appendix heading. */}}
-    {{- $rt := .ReadingTime }}
-    {{- $marker := "Appendix A — The numbers, fully crunched" }}
-    {{- if in .Content $marker }}
-      {{- $body := index (split .Content $marker) 0 }}
-      {{- $rt = div (add (countwords (plainify $body)) 212) 213 }}
-    {{- end }}
     <p class="article__meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
       <span class="article__sep">·</span>
-      <span>{{ $rt }} min read</span>
+      <span>{{ partial "reading-time.html" . }} min read</span>
     </p>
     {{- with .Params.categories }}
       <p class="article__cats">

@@ -1,0 +1,24 @@
+{{- /*
+  Body-only reading time (integer minutes) — single source of truth, used by
+  both the article page and the post card so they can never drift.
+
+  It excludes appendices generically: it truncates the rendered content at the
+  FIRST heading (h1–h6) whose text starts with "Appendix" or "Bijlage", then
+  counts the remaining words with Hugo's own method (plainify + countwords, the
+  same basis as .ReadingTime). No per-article marker to maintain.
+
+  CONVENTION for future briefs: start each appendix with a heading that begins
+  with "Appendix" (EN) or "Bijlage" (NL), e.g. `## Appendix A — …`. Anything
+  before the first such heading counts as the body; everything from it on is
+  treated as reference material and excluded.
+
+  Pages with no such heading (e.g. the manifesto) fall back to the full
+  .ReadingTime unchanged. Pass the page as context:
+    {{ partial "reading-time.html" . }}   or   {{ partial "reading-time.html" $p }}
+*/ -}}
+{{- $rt := .ReadingTime -}}
+{{- $body := replaceRE "(?s)<h[1-6][^>]*>\\s*(Appendix|Bijlage)\\b.*$" "" .Content -}}
+{{- if ne $body .Content -}}
+  {{- $rt = div (add (countwords (plainify $body)) 212) 213 -}}
+{{- end -}}
+{{- $rt -}}
