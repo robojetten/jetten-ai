@@ -1,0 +1,39 @@
+{{ define "main" }}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__inner">
+    <pre class="hero__stars" aria-hidden="true">****</pre>
+    <h1 id="hero-title" class="hero__title">JETTEN.AI</h1>
+    <pre class="hero__stars" aria-hidden="true">****</pre>
+    <p class="hero__thesis">{{ .Site.Params.tagline }}</p>
+    <p class="hero__ready">
+      <span class="hero__ready-word">READY.</span>
+      <span class="hero__cursor" aria-hidden="true">█</span>
+    </p>
+  </div>
+</section>
+
+{{/* Pinned + latest posts */}}
+{{- $posts := where .Site.RegularPages "Section" "posts" }}
+{{- $pinned := where $posts ".Params.pinned" true }}
+{{- $unpinned := where $posts ".Params.pinned" "ne" true }}
+
+<section class="postlist" aria-labelledby="postlist-heading">
+  <h2 id="postlist-heading" class="postlist__heading visually-hidden">Posts</h2>
+
+  {{- range $pinned }}
+    {{ partial "post-card.html" . }}
+  {{- end }}
+
+  {{- if $pinned }}
+    <div class="postlist__divider" aria-hidden="true">— — — — — — — — — — — — —</div>
+  {{- end }}
+
+  {{- range first 10 $unpinned }}
+    {{ partial "post-card.html" . }}
+  {{- end }}
+
+  {{- if gt (len $unpinned) 10 }}
+    <p class="postlist__more"><a href="{{ "/posts/" | relURL }}">ALL POSTS →</a></p>
+  {{- end }}
+</section>
+{{ end }}

@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__inner">
+    <pre class="hero__stars" aria-hidden="true">****</pre>
+    <h1 id="hero-title" class="hero__title">404</h1>
+    <pre class="hero__stars" aria-hidden="true">****</pre>
+    <p class="hero__thesis">LOAD "PAGE",8<br>SEARCHING FOR PAGE<br>?FILE NOT FOUND&nbsp;&nbsp;ERROR</p>
+    <p class="hero__ready">
+      <span class="hero__ready-word">READY.</span>
+      <span class="hero__cursor" aria-hidden="true">█</span>
+    </p>
+  </div>
+</section>
+
+<section class="postlist" aria-label="Where to go instead">
+  <p class="postlist__more"><a href="{{ "/" | relURL }}">RETURN TO JETTEN.AI →</a></p>
+  <p class="postlist__more"><a href="{{ "/posts/" | relURL }}">ALL POSTS →</a></p>
+</section>
+{{ end }}

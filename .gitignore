@@ -1,0 +1,35 @@
+# Hugo build output
+/public/
+/resources/
+.hugo_build.lock
+
+# Hugo cache
+/.hugo_cache/
+
+# Editor / OS noise
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Local scratchpads — never committed
+scratch/
+notes-local/
+*.local.md
+
+# Opsec — the forbidden-pattern list lives here, NOT in the tracked guard script
+.preflight-patterns.local
+.remember/
+
+# Internal / behind-the-scenes docs — kept local, never published to the public repo
+docs/superpowers/
+CLAUDE.md
+RUNBOOK.md
+
+# Source documents (must never end up in git)
+*.docx
+*.doc
+*.pdf
+*.odt

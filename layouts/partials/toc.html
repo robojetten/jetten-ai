@@ -1,0 +1,10 @@
+{{- if .TableOfContents }}
+  {{- if gt (len (string .TableOfContents)) 50 }}
+    <aside class="toc" aria-label="Table of contents">
+      <p class="toc__label">// CONTENTS</p>
+      <div class="toc__body">
+        {{ .TableOfContents }}
+      </div>
+    </aside>
+  {{- end }}
+{{- end }}

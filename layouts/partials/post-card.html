@@ -1,0 +1,24 @@
+{{- $p := . }}
+<article class="post-card{{ if $p.Params.pinned }} post-card--pinned{{ end }}">
+  {{- if $p.Params.pinned }}
+    <p class="post-card__pinned-label">// PINNED</p>
+  {{- end }}
+  <p class="post-card__meta">
+    <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "2006.01.02" }}</time>
+    {{- with $p.Params.categories }}
+      {{- range . }}
+        <span class="post-card__cat">[{{ . | upper }}]</span>
+      {{- end }}
+    {{- end }}
+    <span class="post-card__rt">{{ $p.ReadingTime }} MIN</span>
+  </p>
+  <h2 class="post-card__title">
+    <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+  </h2>
+  {{- with $p.Description }}
+    <p class="post-card__excerpt">{{ . }}</p>
+  {{- else }}
+    <p class="post-card__excerpt">{{ $p.Summary | plainify | truncate 240 }}</p>
+  {{- end }}
+  <p class="post-card__more"><a href="{{ $p.RelPermalink }}">READ →</a></p>
+</article>

@@ -1,0 +1,42 @@
+{{ define "main" }}
+<article class="article article--post">
+  <header class="article__header">
+    {{- with .Params.kicker }}
+      <p class="article__kicker">{{ . }}</p>
+    {{- end }}
+    <h1 class="article__title">{{ .Title }}</h1>
+    {{- with .Description }}
+      <p class="article__deck">{{ . }}</p>
+    {{- end }}
+    {{- /* Reading time excludes the appendices: count words only up to the first appendix heading. */}}
+    {{- $rt := .ReadingTime }}
+    {{- $marker := "Appendix A — The numbers, fully crunched" }}
+    {{- if in .Content $marker }}
+      {{- $body := index (split .Content $marker) 0 }}
+      {{- $rt = div (add (countwords (plainify $body)) 212) 213 }}
+    {{- end }}
+    <p class="article__meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      <span class="article__sep">·</span>
+      <span>{{ $rt }} min read</span>
+    </p>
+    {{- with .Params.categories }}
+      <p class="article__cats">
+        {{- range . }}<span class="article__cat">[{{ . | upper }}]</span> {{ end }}
+      </p>
+    {{- end }}
+  </header>
+
+  <div class="article__layout">
+    {{ partial "toc.html" . }}
+    <div class="article__body">
+      {{ .Content }}
+    </div>
+  </div>
+
+  <footer class="article__footer">
+    <p class="article__signoff">Robo Jetten / jetten.ai</p>
+    <p class="article__back"><a href="{{ "/posts/" | relURL }}">← Back to posts</a></p>
+  </footer>
+</article>
+{{ end }}

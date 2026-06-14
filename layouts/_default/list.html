@@ -1,0 +1,45 @@
+{{ define "main" }}
+{{- $hasPages := gt (len .Pages) 0 -}}
+{{- if $hasPages -}}
+  {{/* Sections that list child pages: /posts/, /categories/foo/ etc. */}}
+  <section class="listpage">
+    <header class="listpage__header">
+      {{- if .Params.kicker }}
+        <p class="listpage__kicker">{{ .Params.kicker }}</p>
+      {{- else }}
+        <p class="listpage__kicker">// {{ .Title | upper }}</p>
+      {{- end }}
+      <h1 class="listpage__title">{{ .Title }}</h1>
+      {{- with .Description }}<p class="listpage__deck">{{ . }}</p>{{- end }}
+    </header>
+
+    {{- $pinned := where .Pages ".Params.pinned" true }}
+    {{- $unpinned := where .Pages ".Params.pinned" "ne" true }}
+
+    <div class="listpage__list">
+      {{- range $pinned }}
+        {{ partial "post-card.html" . }}
+      {{- end }}
+      {{- if $pinned }}
+        <div class="postlist__divider" aria-hidden="true">— — — — — — — — — — — — —</div>
+      {{- end }}
+      {{- range $unpinned }}
+        {{ partial "post-card.html" . }}
+      {{- end }}
+    </div>
+  </section>
+{{- else -}}
+  {{/* Section indexes that ARE pages themselves: /about/, /contact/. */}}
+  {{/* Render as a paper-tone article so the body is comfortable to read. */}}
+  <article class="article">
+    <header class="article__header">
+      {{- with .Params.kicker }}<p class="article__kicker">{{ . }}</p>{{- end }}
+      <h1 class="article__title">{{ .Title }}</h1>
+      {{- with .Description }}<p class="article__deck">{{ . }}</p>{{- end }}
+    </header>
+    <div class="article__body">
+      {{ .Content }}
+    </div>
+  </article>
+{{- end -}}
+{{ end }}

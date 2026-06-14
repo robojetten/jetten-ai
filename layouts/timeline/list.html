@@ -1,0 +1,27 @@
+{{ define "main" }}
+<section class="timeline">
+  <header class="timeline__header">
+    <p class="timeline__kicker">// 1982 — 204X</p>
+    <h1 class="timeline__title">FROM 64 KILOBYTES<br>TO POLICY BRIEFS.</h1>
+    {{- with .Description }}<p class="timeline__deck">{{ . }}</p>{{- end }}
+  </header>
+
+  <ol class="timeline__list">
+    {{- range .Params.milestones }}
+      <li class="timeline__item">
+        <div class="timeline__year">{{ .year }}</div>
+        <div class="timeline__card">
+          <h2 class="timeline__headline">{{ .headline }}</h2>
+          <p class="timeline__body">{{ .body | safeHTML }}</p>
+        </div>
+      </li>
+    {{- end }}
+  </ol>
+
+  {{- with .Content }}
+    <div class="timeline__closing">
+      {{ . }}
+    </div>
+  {{- end }}
+</section>
+{{ end }}

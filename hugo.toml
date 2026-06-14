@@ -1,0 +1,64 @@
+baseURL = "https://jetten.ai/"
+locale = "en"
+defaultContentLanguage = "en"
+title = "jetten.ai"
+enableRobotsTXT = true
+enableEmoji = false
+enableGitInfo = false
+
+[params]
+  description = "We are late. Not too late. Constructive technology policy input for the Dutch cabinet."
+  author = "Robo Jetten"
+  email = "robo@jetten.ai"
+  tagline = "WE ARE LATE. NOT TOO LATE."
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      strikethrough = false  # off: the brief uses "~" as "approximately" 300+ times; the GFM strikethrough pairs them into accidental <del> spans. Intentional strikethrough uses explicit <del> HTML instead.
+      typographer = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 2  # H2 only: body sections + appendix titles. Keeps the TOC short (esp. on mobile, where it stacks above the article); appendix sub-headings (### A.1 …) are reachable by scrolling, not via a wall of TOC links.
+    ordered = false
+  [markup.highlight]
+    style = "dracula"
+    lineNos = false
+    noClasses = false
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[outputFormats]
+  [outputFormats.RSS]
+    mediatype = "application/rss+xml"
+    baseName = "feed"
+
+[privacy]
+  [privacy.googleAnalytics]
+    disable = true
+  [privacy.x]
+    disable = true
+  [privacy.youtube]
+    disable = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.instagram]
+    disable = true
+
+[security]
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$']
+
+[minify]
+  disableXML = false
+  minifyOutput = true
+  [minify.tdewolff.html]
+    keepWhitespace = false

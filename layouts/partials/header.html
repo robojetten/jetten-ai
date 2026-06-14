@@ -1,0 +1,12 @@
+{{- $isHome := .IsHome }}
+<header class="topbar{{ if $isHome }} topbar--home{{ end }}" role="banner">
+  <a class="topbar__brand" href="{{ "/" | relURL }}" aria-label="jetten.ai home">
+    <span class="topbar__brand-name">JETTEN.AI</span>
+  </a>
+  <nav class="topbar__nav" aria-label="Primary">
+    <a href="{{ "/posts/" | relURL }}"{{ if eq .Section "posts" }} aria-current="page"{{ end }}>POSTS</a>
+    <a href="{{ "/timeline/" | relURL }}"{{ if eq .Section "timeline" }} aria-current="page"{{ end }}>TIMELINE</a>
+    <a href="{{ "/about/" | relURL }}"{{ if eq .Section "about" }} aria-current="page"{{ end }}>ABOUT</a>
+    <a href="{{ "/contact/" | relURL }}"{{ if eq .Section "contact" }} aria-current="page"{{ end }}>CONTACT</a>
+  </nav>
+</header>

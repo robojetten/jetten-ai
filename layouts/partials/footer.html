@@ -1,0 +1,17 @@
+<footer class="sitefoot" role="contentinfo">
+  <div class="sitefoot__inner">
+    <p class="sitefoot__line">
+      <span class="sitefoot__bracket">[</span>
+      <span class="sitefoot__author">{{ .Site.Params.author }}</span>
+      <span class="sitefoot__sep">•</span>
+      <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
+      <span class="sitefoot__sep">•</span>
+      <a href="{{ "/feed.xml" | relURL }}">RSS</a>
+      <span class="sitefoot__bracket">]</span>
+    </p>
+    <p class="sitefoot__motto">WE ARE LATE. NOT TOO LATE.</p>
+    <p class="sitefoot__small">
+      Static site. No cookies. No trackers. Fonts self-hosted.
+    </p>
+  </div>
+</footer>
